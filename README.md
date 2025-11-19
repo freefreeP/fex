@@ -200,6 +200,28 @@ bindkey '^f' fex-widget
 - Then press `f` to launch fex (if you used `bindkey -a 'f' fex-widget`)
 - This only affects your shell command-line behavior, not the vi/vim editor
 
+**Using fex with text editors (Helix, Vim, etc.):**
+
+While fex doesn't have built-in editor plugins, you can use it as a file picker by calling it directly from your editor:
+
+For **Helix**, you can create a simple shell command wrapper:
+```bash
+# In your shell, create a helper script ~/bin/fex-picker
+#!/bin/bash
+fex | while read line; do
+    if [[ "$line" != "cd" && -f "$line" ]]; then
+        echo "$line"
+    fi
+done
+```
+
+Then in Helix, use `:sh` to run shell commands or configure a keybinding to open files using this wrapper.
+
+For **Vim/Neovim**, you can use `:terminal` to run fex and capture the output, or create a simple Vim function that calls fex via `system()`.
+
+> [!NOTE]
+> Editor integration requires you to build wrapper scripts or plugins yourself. These are not provided by fex, as it's designed primarily as a shell tool.
+
 ### Fish Setup
 
 To setup the fex key bind for Fish, copy [`shell/.fex.fish`](./shell/.fex.fish) into to home directory.
