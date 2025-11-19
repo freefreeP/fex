@@ -174,19 +174,31 @@ bindkey '^f' fex-widget
 > - ZLE manpage (`man zshzle`), the ZLE BUILTINS section.
 > - [Binding Keys and handling keymaps](https://zsh.sourceforge.io/Guide/zshguide04.html#l93)
 
-> [!NOTE]
+> [!IMPORTANT]
 >
-> `fex` is a **terminal file explorer** that runs as a Zsh widget in your shell.
-> It is not directly integrated with text editors like vi/Vim or Helix. To use
-> `fex` from within a text editor, you would need to exit the editor first, or
-> open a terminal within the editor and invoke `fex` there.
+> **fex is NOT a vi/vim/helix plugin or command!**
+>
+> `fex` is a **terminal file explorer** that runs as a Zsh widget in your shell's command line.
+> It works in your terminal's shell prompt (where you normally type commands like `ls`, `cd`, etc.),
+> NOT inside text editors like vi/Vim or Helix.
+>
+> **This means:**
+> - ❌ You CANNOT use `:f` or any fex command inside vi/vim/helix editor
+> - ❌ fex is NOT a vim plugin
+> - ✅ You use fex at your shell prompt (e.g., `user@hostname:~$`)
+> - ✅ You press the keybinding (like `CTRL-F`) while at the shell command line
 
 **Validating your setup:**
 
-After adding the above lines to your `.zshrc`, restart your shell or run `source ~/.zshrc`.
-Then press `CTRL-F` (or your custom keybinding) in your terminal to invoke fex. If using
-Zsh vi mode with `bindkey -a 'f' fex-widget`, press `ESC` to enter vi command mode, then
-press `f` to launch fex.
+1. **Exit any text editors** (if you're in vi/vim/helix, type `:q` and press Enter to exit)
+2. Make sure you're at your shell prompt (you should see something like `user@hostname:~$`)
+3. Restart your shell or run `source ~/.zshrc`
+4. At the shell prompt, press `CTRL-F` (or your custom keybinding) to invoke fex
+
+**For Zsh vi mode users:**
+- At the shell prompt (NOT inside vi/vim), press `ESC` to enter vi command mode
+- Then press `f` to launch fex (if you used `bindkey -a 'f' fex-widget`)
+- This only affects your shell command-line behavior, not the vi/vim editor
 
 ### Fish Setup
 
