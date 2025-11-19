@@ -162,13 +162,65 @@ bindkey '^f' fex-widget
 > [!TIP]
 >
 > You can change which shortcut is used to invoke `fex` by using the Zsh `bindkey` command.
-> For example if you use Zsh vi mode, you can use `bindkey -a 'f' fex-widget` to
-> invoke `fex` using the `'f'` key when in command mode.
+>
+> **Zsh vi mode** is a shell feature that provides vi-like keybindings for your command line
+> (not related to text editors like Vim or Helix). If you use Zsh vi mode, you can use
+> `bindkey -a 'f' fex-widget` to invoke `fex` using the `'f'` key when in vi command mode.
+>
+> To enable Zsh vi mode, add `bindkey -v` to your `.zshrc` before the fex keybinding.
 >
 > Reference:
 >
 > - ZLE manpage (`man zshzle`), the ZLE BUILTINS section.
 > - [Binding Keys and handling keymaps](https://zsh.sourceforge.io/Guide/zshguide04.html#l93)
+
+> [!IMPORTANT]
+>
+> **fex is NOT a vi/vim/helix plugin or command!**
+>
+> `fex` is a **terminal file explorer** that runs as a Zsh widget in your shell's command line.
+> It works in your terminal's shell prompt (where you normally type commands like `ls`, `cd`, etc.),
+> NOT inside text editors like vi/Vim or Helix.
+>
+> **This means:**
+> - ❌ You CANNOT use `:f` or any fex command inside vi/vim/helix editor
+> - ❌ fex is NOT a vim plugin
+> - ✅ You use fex at your shell prompt (e.g., `user@hostname:~$`)
+> - ✅ You press the keybinding (like `CTRL-F`) while at the shell command line
+
+**Validating your setup:**
+
+1. **Exit any text editors** (if you're in vi/vim/helix, type `:q` and press Enter to exit)
+2. Make sure you're at your shell prompt (you should see something like `user@hostname:~$`)
+3. Restart your shell or run `source ~/.zshrc`
+4. At the shell prompt, press `CTRL-F` (or your custom keybinding) to invoke fex
+
+**For Zsh vi mode users:**
+- At the shell prompt (NOT inside vi/vim), press `ESC` to enter vi command mode
+- Then press `f` to launch fex (if you used `bindkey -a 'f' fex-widget`)
+- This only affects your shell command-line behavior, not the vi/vim editor
+
+**Using fex with text editors (Helix, Vim, etc.):**
+
+While fex doesn't have built-in editor plugins, you can use it as a file picker by calling it directly from your editor:
+
+For **Helix**, you can create a simple shell command wrapper:
+```bash
+# In your shell, create a helper script ~/bin/fex-picker
+#!/bin/bash
+fex | while read line; do
+    if [[ "$line" != "cd" && -f "$line" ]]; then
+        echo "$line"
+    fi
+done
+```
+
+Then in Helix, use `:sh` to run shell commands or configure a keybinding to open files using this wrapper.
+
+For **Vim/Neovim**, you can use `:terminal` to run fex and capture the output, or create a simple Vim function that calls fex via `system()`.
+
+> [!NOTE]
+> Editor integration requires you to build wrapper scripts or plugins yourself. These are not provided by fex, as it's designed primarily as a shell tool.
 
 ### Fish Setup
 
