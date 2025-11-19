@@ -119,8 +119,8 @@ mv main /usr/local/bin/fex
 #### Linux
 
 ```bash
-# To be able to open files, you will need xdg-open from xdg-utils
-sudo apt install xdg-utils
+# To be able to open files, you will need Helix editor (hx)
+# Install from: https://helix-editor.com/
 ```
 
 ```bash

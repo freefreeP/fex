@@ -11,12 +11,12 @@ pub fn open(path: []const u8) !void {
 }
 
 fn openMacOs(path: []const u8) !void {
-    var argv = [_][]const u8{ "open", path };
+    var argv = [_][]const u8{ "hx", path };
     try run(&argv);
 }
 
 fn openLinux(path: []const u8) !void {
-    var argv = [_][]const u8{ "xdg-open", path };
+    var argv = [_][]const u8{ "hx", path };
     try run(&argv);
 }
 
