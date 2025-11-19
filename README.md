@@ -162,13 +162,24 @@ bindkey '^f' fex-widget
 > [!TIP]
 >
 > You can change which shortcut is used to invoke `fex` by using the Zsh `bindkey` command.
-> For example if you use Zsh vi mode, you can use `bindkey -a 'f' fex-widget` to
-> invoke `fex` using the `'f'` key when in command mode.
+>
+> **Zsh vi mode** is a shell feature that provides vi-like keybindings for your command line
+> (not related to text editors like Vim or Helix). If you use Zsh vi mode, you can use
+> `bindkey -a 'f' fex-widget` to invoke `fex` using the `'f'` key when in vi command mode.
+>
+> To enable Zsh vi mode, add `bindkey -v` to your `.zshrc` before the fex keybinding.
 >
 > Reference:
 >
 > - ZLE manpage (`man zshzle`), the ZLE BUILTINS section.
 > - [Binding Keys and handling keymaps](https://zsh.sourceforge.io/Guide/zshguide04.html#l93)
+
+> [!NOTE]
+>
+> `fex` is a **terminal file explorer** that runs as a Zsh widget in your shell.
+> It is not directly integrated with text editors like vi/Vim or Helix. To use
+> `fex` from within a text editor, you would need to exit the editor first, or
+> open a terminal within the editor and invoke `fex` there.
 
 ### Fish Setup
 
