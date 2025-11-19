@@ -36,7 +36,12 @@ tool to zip around a file system:
     - [Linux](#linux)
 - [Setup](#setup)
   - [Zsh Setup](#zsh-setup)
+  - [Fish Setup](#fish-setup)
   - [fex Default Command](#fex-default-command)
+- [Validating Installation](#validating-installation)
+- [Using fex with Text Editors](#using-fex-with-text-editors)
+  - [Opening Files in Your Default Editor](#opening-files-in-your-default-editor)
+  - [Opening Files in a Specific Editor](#opening-files-in-a-specific-editor)
 - [Config](#config)
   - [Display Config](#display-config)
   - [Search Config](#search-config)
@@ -200,6 +205,127 @@ what flags `fex` is invoked using. For example:
 # Sets time displayed to access time and hides icons
 export FEX_DEFAULT_COMMAND="fex --time-type accessed --no-icons"
 ```
+
+## Validating Installation
+
+After installing and setting up fex, you can verify it's working correctly:
+
+### 1. Check the Binary
+
+First, ensure the `fex` executable is accessible:
+
+```bash
+# Check if fex is in your PATH
+which fex
+
+# Check the version
+fex --version
+```
+
+### 2. Test fex Directly
+
+You can run `fex` directly from the command line:
+
+```bash
+# Run fex in the current directory
+fex
+
+# Run fex in a specific directory
+fex /path/to/directory
+```
+
+Once fex opens, you should see a file listing. Try these basic controls:
+- Press `j` or `k` to move up and down
+- Press `l` to enter a directory or `h` to go back up
+- Press `q` to quit
+
+### 3. Test the Shell Widget
+
+After restarting your shell (or running `source ~/.zshrc` for Zsh), test the keyboard shortcut:
+
+1. Press `CTRL-F` (or your custom keybinding)
+2. The fex interface should appear
+3. Navigate using the controls listed above
+4. Press `q` to quit and return to your shell prompt
+
+If fex doesn't launch with the keyboard shortcut, verify that:
+- You've restarted your shell or sourced your RC file
+- The `.fex.zsh` or `.fex.fish` file exists in your home directory
+- The sourcing and bindkey lines are in your RC file
+
+## Using fex with Text Editors
+
+`fex` is a **command-line file explorer**, not a text editor plugin. It helps you navigate your file system and can open files in your preferred text editor.
+
+### Opening Files in Your Default Editor
+
+When you select a file in fex and press:
+- `<enter>` - Toggles directories or opens files with the system default application
+- `o` - Opens the selected item with the system default application
+
+On most systems, text files will open in your default text editor configured in your system settings.
+
+### Opening Files in a Specific Editor
+
+To open files in a specific editor like Vim, Neovim, or Helix, use fex's **command mode**:
+
+1. **Launch fex** with `CTRL-F` (or run `fex` in your terminal)
+2. **Navigate** to the file you want to edit using `j`, `k`, `h`, `l`
+3. **Enter command mode** by pressing `:`
+4. **Type your editor command**, for example:
+   - `vim` - Opens the selected file in Vim
+   - `nvim` - Opens the selected file in Neovim
+   - `hx` - Opens the selected file in Helix
+   - `code` - Opens the selected file in VS Code
+5. **Press `<enter>`** to execute the command
+
+When you press `<enter>`, fex will:
+- Quit the fex interface
+- Return to your shell
+- Execute the command with the selected file path as an argument
+
+#### Example Workflow
+
+```
+1. Press CTRL-F to launch fex
+2. Navigate to your file (e.g., main.zig)
+3. Press : to enter command mode
+4. Type: nvim
+5. Press <enter>
+```
+
+This will run `nvim /path/to/main.zig` in your shell.
+
+#### Opening Multiple Files
+
+You can select multiple files in fex:
+
+1. Navigate to a file and press `<tab>` to select it
+2. Navigate to other files and press `<tab>` to select them
+3. Press `:` and type your editor command
+4. Press `<enter>`
+
+The command will be executed with all selected file paths as arguments. For example, if you select `file1.txt` and `file2.txt`, then type `:vim` and press enter, it will run:
+
+```bash
+vim /path/to/file1.txt /path/to/file2.txt
+```
+
+#### Setting a Default Editor Command
+
+If you primarily use fex to open files in a specific editor, you can set up a shell alias or function. Add this to your `.zshrc`:
+
+```bash
+# Launch fex and open selection in Neovim
+function fe() {
+  local file=$(fex --no-fullscreen | head -1)
+  if [[ -n "$file" ]]; then
+    nvim "$file"
+  fi
+}
+```
+
+Then you can use `fe` in your terminal to quickly select and edit a file.
 
 ## Config
 
