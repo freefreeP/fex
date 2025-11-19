@@ -148,12 +148,12 @@ the shell you use.
 
 ### Zsh Setup
 
-To setup the Zsh widget for fex, first copy the file [`shell/.fex.zsh`](./shell/.fex.zsh) to your
-home directory. Then copy the following lines into your `.zshrc`:
+To setup the Zsh widget for fex, first copy the file [`shell/.fex.zsh`](./shell/.fex.zsh) to `~/.fex/.fex.zsh`.
+Then copy the following lines into your `.zshrc`:
 
 ```bash
 # Source .fex.zsh if it's present
-[ -f ~/.fex.zsh ] && source ~/.fex.zsh
+[ -f ~/.fex/.fex.zsh ] && source ~/.fex/.fex.zsh
 
 # Bind CTRL-F to invoke fex (key binds can be custom)
 bindkey '^f' fex-widget
@@ -172,12 +172,12 @@ bindkey '^f' fex-widget
 
 ### Fish Setup
 
-To setup the fex key bind for Fish, copy [`shell/.fex.fish`](./shell/.fex.fish) into to home directory.
+To setup the fex key bind for Fish, copy [`shell/.fex.fish`](./shell/.fex.fish) to `~/.fex/.fex.fish`.
 Then copy the following lines below into your `$HOME/.config/fish/config.fish`.
 
 ```bash
 # Source .fex.fish if it's present
-[ -f ~/.fex.fish ] && source ~/.fex.fish
+[ -f ~/.fex/.fex.fish ] && source ~/.fex/.fex.fish
 
 # Bind CTRL-F to invoke fex (key binds can be custom)
 bind \cf fex-widget
