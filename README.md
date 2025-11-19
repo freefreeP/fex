@@ -181,6 +181,13 @@ bindkey '^f' fex-widget
 > `fex` from within a text editor, you would need to exit the editor first, or
 > open a terminal within the editor and invoke `fex` there.
 
+**Validating your setup:**
+
+After adding the above lines to your `.zshrc`, restart your shell or run `source ~/.zshrc`.
+Then press `CTRL-F` (or your custom keybinding) in your terminal to invoke fex. If using
+Zsh vi mode with `bindkey -a 'f' fex-widget`, press `ESC` to enter vi command mode, then
+press `f` to launch fex.
+
 ### Fish Setup
 
 To setup the fex key bind for Fish, copy [`shell/.fex.fish`](./shell/.fex.fish) into to home directory.
